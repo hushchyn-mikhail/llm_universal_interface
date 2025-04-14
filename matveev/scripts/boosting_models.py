@@ -59,13 +59,13 @@ def run_lr_tuning(X_train, y_train, X_valid, y_valid, column_transformer, n_tria
 def objective_catboost(trial, X_train, y_train, X_valid, y_valid, column_transformer, multi):
     params = {
         "depth": trial.suggest_categorical("depth", [2, 4, 6, 8, 10]),
-        "learning_rate": trial.suggest_categorical("learning_rate", [0.01, 0.03, 0.1, 0.3]),
-        "l2_leaf_reg": trial.suggest_categorical("l2_leaf_reg", [0.001, 0.01, 0.1, 1.0, 3.0, 6.0, 10.0])
+        "learning_rate": trial.suggest_categorical("learning_rate", [0.001, 0.01, 0.03, 0.1, 0.3]),
+        "l2_leaf_reg": trial.suggest_categorical("l2_leaf_reg", [0.001, 0.01, 0.1, 1.0, 3.0, 6.0])
     }
     loss_function = "MultiClass" if multi else "Logloss"
     pipeline = Pipeline([
         ("ohe_and_scaling", column_transformer),
-        ("classifier", CatBoostClassifier(**params, loss_function=loss_function, iterations=1000, random_state=SEED, verbose=0))
+        ("classifier", CatBoostClassifier(**params, loss_function=loss_function, iterations=1000, random_state=SEED, verbose=0, allow_writing_files=False))
     ])
     model = pipeline.fit(X_train, y_train)
 
@@ -83,7 +83,7 @@ def run_catboost_tuning(X_train, y_train, X_valid, y_valid, column_transformer, 
     loss_function = "MultiClass" if multi else "Logloss"
     pipeline = Pipeline([
         ("ohe_and_scaling", column_transformer),
-        ("clf", CatBoostClassifier(**study.best_trial.params, loss_function=loss_function, iterations=1000, random_state=SEED, verbose=0))
+        ("clf", CatBoostClassifier(**study.best_trial.params, loss_function=loss_function, iterations=1000, random_state=SEED, verbose=0, allow_writing_files=False))
     ])
     model = pipeline.fit(X_train, y_train)
     return model
@@ -111,7 +111,7 @@ def objective_lgbm(trial, X_train, y_train, X_valid, y_valid, column_transformer
     return score
 
 def run_lgbm_tuning(X_train, y_train, X_valid, y_valid, column_transformer, n_trials=20, multi=False):
-    study = optuna.create_study(study_name="lgdm_optimization", direction="maximize")
+    study = optuna.create_study(study_name="lightgbm_optimization", direction="maximize")
     study.optimize(lambda trial: objective_lgbm(trial, X_train, y_train, X_valid, y_valid, column_transformer, multi), n_trials=n_trials)
     pipeline = Pipeline([
         ("ohe_and_scaling", column_transformer),
