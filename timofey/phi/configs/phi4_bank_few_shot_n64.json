@@ -1,0 +1,7 @@
+{
+  "dataset": "bank",
+  "mode": "few_shot",
+  "n_shots": 64,
+  "max_seq_length": 4096,
+  "eval_batch_size": 4
+}
