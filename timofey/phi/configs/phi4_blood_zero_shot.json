@@ -1,0 +1,6 @@
+{
+  "dataset": "blood",
+  "mode": "zero_shot",
+  "max_seq_length": 1024,
+  "eval_batch_size": 16
+}

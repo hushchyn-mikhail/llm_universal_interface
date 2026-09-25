@@ -1,0 +1,18 @@
+{
+  "dataset": "jungle",
+  "mode": "finetune",
+  "missing_rate": 0.2,
+  "num_epochs": 3,
+  "train_batch_size": 4,
+  "grad_accum": 4,
+  "max_seq_length": 1024,
+  "eval_batch_size": 16,
+  "learning_rate": 0.0002,
+  "warmup_steps": 50,
+  "weight_decay": 0.01,
+  "lora_r": 16,
+  "lora_alpha": 32,
+  "lora_dropout": 0.05,
+  "save_lora": false,
+  "per_dataset_cap": 8000
+}
