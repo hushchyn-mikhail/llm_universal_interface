@@ -1,0 +1,19 @@
+{
+  "dataset": "income",
+  "mode": "finetune",
+  "seed": 42,
+  "run_name": "phi4_income_finetune_m050_ep3",
+  "n_shots": 0,
+  "missing_rate": 0.5,
+  "missingness_scheme": "bernoulli",
+  "max_seq_length": 1024,
+  "eval_max_seq_length": 1024,
+  "eval_batch_size": 4,
+  "train_batch_size": 4,
+  "grad_accum": 4,
+  "per_dataset_cap": null,
+  "eval_test_cap": null,
+  "save_lora": true,
+  "checkpoint_selection": "validation_roc_auc",
+  "num_epochs": 3
+}

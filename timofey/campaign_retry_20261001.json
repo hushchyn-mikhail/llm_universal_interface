@@ -1,0 +1,178 @@
+{
+  "schema_version": 1,
+  "campaign_id": "phi_retry_20261001",
+  "hardware": {
+    "gpu": "V100 32GB",
+    "dtype": "float16",
+    "microbatch": 4,
+    "gradient_accumulation": 4,
+    "effective_batch": 16,
+    "reason": "V100 used because A100 was unavailable under the cluster QOS.",
+    "eval_batch_size": 1
+  },
+  "experiments": [
+    {
+      "dataset": "blood",
+      "mode": "finetune",
+      "missing_rate": 0.5,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/retry_20261001/phi4_blood_finetune_m050_ep20"
+    },
+    {
+      "dataset": "car",
+      "mode": "finetune",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/retry_20261001/phi4_car_finetune_m000_ep10"
+    },
+    {
+      "dataset": "car",
+      "mode": "finetune",
+      "missing_rate": 0.5,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/retry_20261001/phi4_car_finetune_m050_ep10"
+    },
+    {
+      "dataset": "california",
+      "mode": "finetune",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/retry_20261001/phi4_california_finetune_m000_ep10"
+    },
+    {
+      "dataset": "california",
+      "mode": "finetune",
+      "missing_rate": 0.9,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/retry_20261001/phi4_california_finetune_m090_ep10"
+    },
+    {
+      "dataset": "heart",
+      "mode": "multitask",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/retry_20261001/phi4_multitask/heart"
+    },
+    {
+      "dataset": "blood",
+      "mode": "multitask",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/retry_20261001/phi4_multitask/blood"
+    },
+    {
+      "dataset": "credit_g",
+      "mode": "multitask",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/retry_20261001/phi4_multitask/credit_g"
+    },
+    {
+      "dataset": "diabetes",
+      "mode": "multitask",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/retry_20261001/phi4_multitask/diabetes"
+    },
+    {
+      "dataset": "car",
+      "mode": "multitask",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/retry_20261001/phi4_multitask/car"
+    },
+    {
+      "dataset": "bank",
+      "mode": "multitask",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/retry_20261001/phi4_multitask/bank"
+    },
+    {
+      "dataset": "california",
+      "mode": "multitask",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/retry_20261001/phi4_multitask/california"
+    },
+    {
+      "dataset": "income",
+      "mode": "multitask",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/retry_20261001/phi4_multitask/income"
+    }
+  ],
+  "jobs": [
+    {
+      "kind": "single",
+      "config": "phi/configs/retry_20261001/phi4_blood_finetune_m050_ep20.json",
+      "run_dir": "runs/retry_20261001/phi4_blood_finetune_m050_ep20",
+      "original_array_index": 10
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/retry_20261001/phi4_car_finetune_m000_ep10.json",
+      "run_dir": "runs/retry_20261001/phi4_car_finetune_m000_ep10",
+      "original_array_index": 26
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/retry_20261001/phi4_car_finetune_m050_ep10.json",
+      "run_dir": "runs/retry_20261001/phi4_car_finetune_m050_ep10",
+      "original_array_index": 28
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/retry_20261001/phi4_california_finetune_m000_ep10.json",
+      "run_dir": "runs/retry_20261001/phi4_california_finetune_m000_ep10",
+      "original_array_index": 38
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/retry_20261001/phi4_california_finetune_m090_ep10.json",
+      "run_dir": "runs/retry_20261001/phi4_california_finetune_m090_ep10",
+      "original_array_index": 41
+    },
+    {
+      "kind": "multitask",
+      "config": "phi/configs/retry_20261001/phi4_multitask.json",
+      "run_dir": "runs/retry_20261001/phi4_multitask",
+      "original_array_index": 48
+    }
+  ],
+  "retry_of": {
+    "campaign_id": "phi_20260927",
+    "array_job_id": "4356377",
+    "indices": [
+      10,
+      26,
+      28,
+      38,
+      41,
+      48
+    ],
+    "restart": "from_base_model"
+  },
+  "numeric_fix": {
+    "change": "evaluate each row separately without padding",
+    "previous_eval_batch_size": 4,
+    "eval_batch_size": 1,
+    "training_changed": false,
+    "evidence_job_id": "4366883",
+    "evidence_scope": "reproduced failed Blood 50% validation batch in direct and FP16 autocast; all six adapter checkpoints have finite tensors"
+  }
+}

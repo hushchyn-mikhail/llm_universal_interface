@@ -1,0 +1,18 @@
+{
+  "dataset": "income",
+  "mode": "few_shot",
+  "seed": 42,
+  "run_name": "phi4_income_few_shot_n64",
+  "n_shots": 64,
+  "missing_rate": 0,
+  "missingness_scheme": "bernoulli",
+  "max_seq_length": 1024,
+  "eval_max_seq_length": 32768,
+  "eval_batch_size": 1,
+  "train_batch_size": 4,
+  "grad_accum": 4,
+  "per_dataset_cap": null,
+  "eval_test_cap": null,
+  "save_lora": true,
+  "checkpoint_selection": "last"
+}
