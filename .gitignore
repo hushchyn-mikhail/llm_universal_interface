@@ -30,6 +30,8 @@ checkpoint-*/
 *.parquet
 *.zip
 timofey/results/
+timofey/runs/
+timofey/exports/
 timofey/phi/notebooks/phi4_multitask*/
 timofey/phi/notebooks/phi4_multitask*.json
 *.log

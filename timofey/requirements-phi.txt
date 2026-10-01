@@ -1,0 +1,15 @@
+# Python 3.10; cluster package versions are in reports/phi/20260930/environment.json.
+# CUDA 12.4 build: pip install torch==2.6.0 --index-url https://download.pytorch.org/whl/cu124
+torch==2.6.0
+transformers==4.57.6
+peft==0.19.1
+accelerate==1.13.0
+datasets==4.0.0
+tokenizers==0.22.2
+huggingface-hub==0.36.2
+safetensors==0.7.0
+numpy==1.26.4
+pandas==2.3.2
+pyarrow==20.0.0
+scipy==1.15.3
+scikit-learn==1.7.2

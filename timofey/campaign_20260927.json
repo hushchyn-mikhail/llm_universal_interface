@@ -1,0 +1,709 @@
+{
+  "schema_version": 1,
+  "campaign_id": "phi_20260927",
+  "hardware": {
+    "gpu": "V100 32GB",
+    "dtype": "float16",
+    "microbatch": 4,
+    "gradient_accumulation": 4,
+    "effective_batch": 16,
+    "reason": "V100 used because A100 was unavailable under the cluster QOS."
+  },
+  "experiments": [
+    {
+      "dataset": "heart",
+      "mode": "zero_shot",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_heart_zero_shot"
+    },
+    {
+      "dataset": "heart",
+      "mode": "few_shot",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 64,
+      "run_dir": "runs/phi4_heart_few_shot_n64"
+    },
+    {
+      "dataset": "heart",
+      "mode": "finetune",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_heart_finetune_m000_ep20"
+    },
+    {
+      "dataset": "heart",
+      "mode": "finetune",
+      "missing_rate": 0.2,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_heart_finetune_m020_ep20"
+    },
+    {
+      "dataset": "heart",
+      "mode": "finetune",
+      "missing_rate": 0.5,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_heart_finetune_m050_ep20"
+    },
+    {
+      "dataset": "heart",
+      "mode": "finetune",
+      "missing_rate": 0.9,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_heart_finetune_m090_ep20"
+    },
+    {
+      "dataset": "blood",
+      "mode": "zero_shot",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_blood_zero_shot"
+    },
+    {
+      "dataset": "blood",
+      "mode": "few_shot",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 64,
+      "run_dir": "runs/phi4_blood_few_shot_n64"
+    },
+    {
+      "dataset": "blood",
+      "mode": "finetune",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_blood_finetune_m000_ep20"
+    },
+    {
+      "dataset": "blood",
+      "mode": "finetune",
+      "missing_rate": 0.2,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_blood_finetune_m020_ep20"
+    },
+    {
+      "dataset": "blood",
+      "mode": "finetune",
+      "missing_rate": 0.5,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_blood_finetune_m050_ep20"
+    },
+    {
+      "dataset": "blood",
+      "mode": "finetune",
+      "missing_rate": 0.9,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_blood_finetune_m090_ep20"
+    },
+    {
+      "dataset": "credit_g",
+      "mode": "zero_shot",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_credit_g_zero_shot"
+    },
+    {
+      "dataset": "credit_g",
+      "mode": "few_shot",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 64,
+      "run_dir": "runs/phi4_credit_g_few_shot_n64"
+    },
+    {
+      "dataset": "credit_g",
+      "mode": "finetune",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_credit_g_finetune_m000_ep20"
+    },
+    {
+      "dataset": "credit_g",
+      "mode": "finetune",
+      "missing_rate": 0.2,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_credit_g_finetune_m020_ep20"
+    },
+    {
+      "dataset": "credit_g",
+      "mode": "finetune",
+      "missing_rate": 0.5,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_credit_g_finetune_m050_ep20"
+    },
+    {
+      "dataset": "credit_g",
+      "mode": "finetune",
+      "missing_rate": 0.9,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_credit_g_finetune_m090_ep20"
+    },
+    {
+      "dataset": "diabetes",
+      "mode": "zero_shot",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_diabetes_zero_shot"
+    },
+    {
+      "dataset": "diabetes",
+      "mode": "few_shot",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 64,
+      "run_dir": "runs/phi4_diabetes_few_shot_n64"
+    },
+    {
+      "dataset": "diabetes",
+      "mode": "finetune",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_diabetes_finetune_m000_ep20"
+    },
+    {
+      "dataset": "diabetes",
+      "mode": "finetune",
+      "missing_rate": 0.2,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_diabetes_finetune_m020_ep20"
+    },
+    {
+      "dataset": "diabetes",
+      "mode": "finetune",
+      "missing_rate": 0.5,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_diabetes_finetune_m050_ep20"
+    },
+    {
+      "dataset": "diabetes",
+      "mode": "finetune",
+      "missing_rate": 0.9,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_diabetes_finetune_m090_ep20"
+    },
+    {
+      "dataset": "car",
+      "mode": "zero_shot",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_car_zero_shot"
+    },
+    {
+      "dataset": "car",
+      "mode": "few_shot",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 64,
+      "run_dir": "runs/phi4_car_few_shot_n64"
+    },
+    {
+      "dataset": "car",
+      "mode": "finetune",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_car_finetune_m000_ep10"
+    },
+    {
+      "dataset": "car",
+      "mode": "finetune",
+      "missing_rate": 0.2,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_car_finetune_m020_ep10"
+    },
+    {
+      "dataset": "car",
+      "mode": "finetune",
+      "missing_rate": 0.5,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_car_finetune_m050_ep10"
+    },
+    {
+      "dataset": "car",
+      "mode": "finetune",
+      "missing_rate": 0.9,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_car_finetune_m090_ep10"
+    },
+    {
+      "dataset": "bank",
+      "mode": "zero_shot",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_bank_zero_shot"
+    },
+    {
+      "dataset": "bank",
+      "mode": "few_shot",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 64,
+      "run_dir": "runs/phi4_bank_few_shot_n64"
+    },
+    {
+      "dataset": "bank",
+      "mode": "finetune",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_bank_finetune_m000_ep3"
+    },
+    {
+      "dataset": "bank",
+      "mode": "finetune",
+      "missing_rate": 0.2,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_bank_finetune_m020_ep3"
+    },
+    {
+      "dataset": "bank",
+      "mode": "finetune",
+      "missing_rate": 0.5,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_bank_finetune_m050_ep3"
+    },
+    {
+      "dataset": "bank",
+      "mode": "finetune",
+      "missing_rate": 0.9,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_bank_finetune_m090_ep3"
+    },
+    {
+      "dataset": "california",
+      "mode": "zero_shot",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_california_zero_shot"
+    },
+    {
+      "dataset": "california",
+      "mode": "few_shot",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 64,
+      "run_dir": "runs/phi4_california_few_shot_n64"
+    },
+    {
+      "dataset": "california",
+      "mode": "finetune",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_california_finetune_m000_ep10"
+    },
+    {
+      "dataset": "california",
+      "mode": "finetune",
+      "missing_rate": 0.2,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_california_finetune_m020_ep10"
+    },
+    {
+      "dataset": "california",
+      "mode": "finetune",
+      "missing_rate": 0.5,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_california_finetune_m050_ep10"
+    },
+    {
+      "dataset": "california",
+      "mode": "finetune",
+      "missing_rate": 0.9,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_california_finetune_m090_ep10"
+    },
+    {
+      "dataset": "income",
+      "mode": "zero_shot",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_income_zero_shot"
+    },
+    {
+      "dataset": "income",
+      "mode": "few_shot",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 64,
+      "run_dir": "runs/phi4_income_few_shot_n64"
+    },
+    {
+      "dataset": "income",
+      "mode": "finetune",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_income_finetune_m000_ep3"
+    },
+    {
+      "dataset": "income",
+      "mode": "finetune",
+      "missing_rate": 0.2,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_income_finetune_m020_ep3"
+    },
+    {
+      "dataset": "income",
+      "mode": "finetune",
+      "missing_rate": 0.5,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_income_finetune_m050_ep3"
+    },
+    {
+      "dataset": "income",
+      "mode": "finetune",
+      "missing_rate": 0.9,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_income_finetune_m090_ep3"
+    },
+    {
+      "dataset": "heart",
+      "mode": "multitask",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_multitask/heart"
+    },
+    {
+      "dataset": "blood",
+      "mode": "multitask",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_multitask/blood"
+    },
+    {
+      "dataset": "credit_g",
+      "mode": "multitask",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_multitask/credit_g"
+    },
+    {
+      "dataset": "diabetes",
+      "mode": "multitask",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_multitask/diabetes"
+    },
+    {
+      "dataset": "car",
+      "mode": "multitask",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_multitask/car"
+    },
+    {
+      "dataset": "bank",
+      "mode": "multitask",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_multitask/bank"
+    },
+    {
+      "dataset": "california",
+      "mode": "multitask",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_multitask/california"
+    },
+    {
+      "dataset": "income",
+      "mode": "multitask",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/phi4_multitask/income"
+    }
+  ],
+  "jobs": [
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_heart_zero_shot.json",
+      "run_dir": "runs/phi4_heart_zero_shot"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_heart_few_shot_n64.json",
+      "run_dir": "runs/phi4_heart_few_shot_n64"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_heart_finetune_m000_ep20.json",
+      "run_dir": "runs/phi4_heart_finetune_m000_ep20"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_heart_finetune_m020_ep20.json",
+      "run_dir": "runs/phi4_heart_finetune_m020_ep20"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_heart_finetune_m050_ep20.json",
+      "run_dir": "runs/phi4_heart_finetune_m050_ep20"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_heart_finetune_m090_ep20.json",
+      "run_dir": "runs/phi4_heart_finetune_m090_ep20"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_blood_zero_shot.json",
+      "run_dir": "runs/phi4_blood_zero_shot"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_blood_few_shot_n64.json",
+      "run_dir": "runs/phi4_blood_few_shot_n64"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_blood_finetune_m000_ep20.json",
+      "run_dir": "runs/phi4_blood_finetune_m000_ep20"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_blood_finetune_m020_ep20.json",
+      "run_dir": "runs/phi4_blood_finetune_m020_ep20"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_blood_finetune_m050_ep20.json",
+      "run_dir": "runs/phi4_blood_finetune_m050_ep20"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_blood_finetune_m090_ep20.json",
+      "run_dir": "runs/phi4_blood_finetune_m090_ep20"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_credit_g_zero_shot.json",
+      "run_dir": "runs/phi4_credit_g_zero_shot"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_credit_g_few_shot_n64.json",
+      "run_dir": "runs/phi4_credit_g_few_shot_n64"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_credit_g_finetune_m000_ep20.json",
+      "run_dir": "runs/phi4_credit_g_finetune_m000_ep20"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_credit_g_finetune_m020_ep20.json",
+      "run_dir": "runs/phi4_credit_g_finetune_m020_ep20"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_credit_g_finetune_m050_ep20.json",
+      "run_dir": "runs/phi4_credit_g_finetune_m050_ep20"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_credit_g_finetune_m090_ep20.json",
+      "run_dir": "runs/phi4_credit_g_finetune_m090_ep20"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_diabetes_zero_shot.json",
+      "run_dir": "runs/phi4_diabetes_zero_shot"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_diabetes_few_shot_n64.json",
+      "run_dir": "runs/phi4_diabetes_few_shot_n64"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_diabetes_finetune_m000_ep20.json",
+      "run_dir": "runs/phi4_diabetes_finetune_m000_ep20"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_diabetes_finetune_m020_ep20.json",
+      "run_dir": "runs/phi4_diabetes_finetune_m020_ep20"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_diabetes_finetune_m050_ep20.json",
+      "run_dir": "runs/phi4_diabetes_finetune_m050_ep20"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_diabetes_finetune_m090_ep20.json",
+      "run_dir": "runs/phi4_diabetes_finetune_m090_ep20"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_car_zero_shot.json",
+      "run_dir": "runs/phi4_car_zero_shot"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_car_few_shot_n64.json",
+      "run_dir": "runs/phi4_car_few_shot_n64"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_car_finetune_m000_ep10.json",
+      "run_dir": "runs/phi4_car_finetune_m000_ep10"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_car_finetune_m020_ep10.json",
+      "run_dir": "runs/phi4_car_finetune_m020_ep10"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_car_finetune_m050_ep10.json",
+      "run_dir": "runs/phi4_car_finetune_m050_ep10"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_car_finetune_m090_ep10.json",
+      "run_dir": "runs/phi4_car_finetune_m090_ep10"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_bank_zero_shot.json",
+      "run_dir": "runs/phi4_bank_zero_shot"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_bank_few_shot_n64.json",
+      "run_dir": "runs/phi4_bank_few_shot_n64"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_bank_finetune_m000_ep3.json",
+      "run_dir": "runs/phi4_bank_finetune_m000_ep3"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_bank_finetune_m020_ep3.json",
+      "run_dir": "runs/phi4_bank_finetune_m020_ep3"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_bank_finetune_m050_ep3.json",
+      "run_dir": "runs/phi4_bank_finetune_m050_ep3"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_bank_finetune_m090_ep3.json",
+      "run_dir": "runs/phi4_bank_finetune_m090_ep3"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_california_zero_shot.json",
+      "run_dir": "runs/phi4_california_zero_shot"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_california_few_shot_n64.json",
+      "run_dir": "runs/phi4_california_few_shot_n64"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_california_finetune_m000_ep10.json",
+      "run_dir": "runs/phi4_california_finetune_m000_ep10"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_california_finetune_m020_ep10.json",
+      "run_dir": "runs/phi4_california_finetune_m020_ep10"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_california_finetune_m050_ep10.json",
+      "run_dir": "runs/phi4_california_finetune_m050_ep10"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_california_finetune_m090_ep10.json",
+      "run_dir": "runs/phi4_california_finetune_m090_ep10"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_income_zero_shot.json",
+      "run_dir": "runs/phi4_income_zero_shot"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_income_few_shot_n64.json",
+      "run_dir": "runs/phi4_income_few_shot_n64"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_income_finetune_m000_ep3.json",
+      "run_dir": "runs/phi4_income_finetune_m000_ep3"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_income_finetune_m020_ep3.json",
+      "run_dir": "runs/phi4_income_finetune_m020_ep3"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_income_finetune_m050_ep3.json",
+      "run_dir": "runs/phi4_income_finetune_m050_ep3"
+    },
+    {
+      "kind": "single",
+      "config": "phi/configs/article/phi4_income_finetune_m090_ep3.json",
+      "run_dir": "runs/phi4_income_finetune_m090_ep3"
+    },
+    {
+      "kind": "multitask",
+      "config": "phi/configs/article/phi4_multitask.json",
+      "run_dir": "runs/phi4_multitask"
+    }
+  ]
+}
