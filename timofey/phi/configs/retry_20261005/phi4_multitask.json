@@ -1,0 +1,5 @@
+{
+  "train_batch_size": 4,
+  "grad_accum": 4,
+  "eval_batch_size": 4
+}

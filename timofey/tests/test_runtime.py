@@ -30,6 +30,10 @@ class Tokenizer:
 class FakeModel:
     def __init__(self):
         self.training = True
+        self.weight = runtime.torch.nn.Parameter(runtime.torch.ones(1))
+
+    def named_parameters(self):
+        return [("adapter", self.weight)]
 
     def eval(self):
         self.training = False
