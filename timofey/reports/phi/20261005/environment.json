@@ -1,0 +1,13 @@
+{
+  "python": "3.10.18",
+  "packages": {
+    "torch": "2.6.0+cu124",
+    "transformers": "4.57.6",
+    "peft": "0.19.1",
+    "accelerate": "1.13.0",
+    "datasets": "4.0.0",
+    "numpy": "1.26.4",
+    "pandas": "2.3.2",
+    "scikit-learn": "1.7.2"
+  }
+}

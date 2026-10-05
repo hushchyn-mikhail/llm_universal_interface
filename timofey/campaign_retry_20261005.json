@@ -1,0 +1,121 @@
+{
+  "schema_version": 1,
+  "campaign_id": "phi_retry_20261005",
+  "hardware": {
+    "gpu": "V100 32GB",
+    "dtype": "float32",
+    "microbatch": 4,
+    "gradient_accumulation": 4,
+    "effective_batch": 16,
+    "reason": "Full FP32 rerun on V100 after nonfinite FP16 training and validation scores.",
+    "eval_batch_size": 4
+  },
+  "experiments": [
+    {
+      "dataset": "blood",
+      "mode": "finetune",
+      "missing_rate": 0.5,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/retry_20261005/phi4_blood_finetune_m050_ep20"
+    },
+    {
+      "dataset": "heart",
+      "mode": "multitask",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/retry_20261005/phi4_multitask/heart"
+    },
+    {
+      "dataset": "blood",
+      "mode": "multitask",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/retry_20261005/phi4_multitask/blood"
+    },
+    {
+      "dataset": "credit_g",
+      "mode": "multitask",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/retry_20261005/phi4_multitask/credit_g"
+    },
+    {
+      "dataset": "diabetes",
+      "mode": "multitask",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/retry_20261005/phi4_multitask/diabetes"
+    },
+    {
+      "dataset": "car",
+      "mode": "multitask",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/retry_20261005/phi4_multitask/car"
+    },
+    {
+      "dataset": "bank",
+      "mode": "multitask",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/retry_20261005/phi4_multitask/bank"
+    },
+    {
+      "dataset": "california",
+      "mode": "multitask",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/retry_20261005/phi4_multitask/california"
+    },
+    {
+      "dataset": "income",
+      "mode": "multitask",
+      "missing_rate": 0,
+      "seed": 42,
+      "n_shots": 0,
+      "run_dir": "runs/retry_20261005/phi4_multitask/income"
+    }
+  ],
+  "jobs": [
+    {
+      "kind": "single",
+      "config": "phi/configs/retry_20261005/phi4_blood_finetune_m050_ep20.json",
+      "run_dir": "runs/retry_20261005/phi4_blood_finetune_m050_ep20",
+      "original_array_index": 10
+    },
+    {
+      "kind": "multitask",
+      "config": "phi/configs/retry_20261005/phi4_multitask.json",
+      "run_dir": "runs/retry_20261005/phi4_multitask",
+      "original_array_index": 48
+    }
+  ],
+  "retry_of": {
+    "campaign_id": "phi_retry_20261001",
+    "array_job_id": "4366890",
+    "indices": [
+      0,
+      5
+    ],
+    "restart": "from_base_model"
+  },
+  "numeric_fix": {
+    "change": "FP32 training and evaluation; right padding during training; reject nonfinite loss, gradients and adapter weights",
+    "previous_dtype": "float16",
+    "dtype": "float32",
+    "eval_batch_size": 4,
+    "effective_train_batch_size": 16,
+    "validation": "passed_gpu_probe",
+    "probe_job_id": "4377387",
+    "probe_peak_allocated_bytes": 30503475200,
+    "probe_scope": "Two previously failing validation batches and two fresh LoRA optimizer steps, including 1024 tokens and effective batch 16; not a complete training run"
+  }
+}

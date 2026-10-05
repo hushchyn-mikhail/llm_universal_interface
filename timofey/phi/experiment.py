@@ -30,11 +30,13 @@ import torch
 from importlib.metadata import version
 
 try:
+    from .numerics import FiniteTrainer, FiniteParameters, check_parameters, check_optimizer
     from .attention import ATTENTION_IMPLEMENTATION, register_attention
     from .scoring import class_probabilities, encode_candidates
     from .run_artifacts import (RunArtifacts, atomic_json, sha256_file, text_sha256,
                                 hash_files, verify_files, sync_directory, sync_files)
 except ImportError:
+    from numerics import FiniteTrainer, FiniteParameters, check_parameters, check_optimizer
     from attention import ATTENTION_IMPLEMENTATION, register_attention
     from scoring import class_probabilities, encode_candidates
     from run_artifacts import (RunArtifacts, atomic_json, sha256_file, text_sha256,
@@ -53,7 +55,6 @@ from transformers import (
     AutoModelForCausalLM,
     AutoTokenizer,
     DataCollatorForLanguageModeling,
-    Trainer,
     TrainerCallback,
     TrainingArguments,
 )
@@ -714,7 +715,7 @@ def model_fingerprint(directory, hash_weights=False):
 def make_manifest(args, cfg, info, precision, few):
     data_file = DATA_DIR / DATASETS_REGISTRY[cfg["dataset"]]["file"]
     source_dir = Path(__file__).resolve().parent
-    sources = [source_dir / name for name in ("experiment.py", "scoring.py", "run_artifacts.py", "attention.py")]
+    sources = [source_dir / name for name in ("experiment.py", "scoring.py", "run_artifacts.py", "attention.py", "numerics.py")]
     feature_count = len(info["feature_names"])
     drop_count = int(feature_count * cfg["missing_rate"]) if cfg["mode"] == "finetune" else 0
     metadata = {"filename": data_file.name, "sha256": sha256_file(data_file),
@@ -726,6 +727,7 @@ def make_manifest(args, cfg, info, precision, few):
         "schema_version": 1, "run_id": args.run_dir.resolve().name, "plan_id": args.plan_id,
         "scoring": "full_label_log_likelihood_v2", "config": cfg,
         "dtype": precision["name"], "attention_implementation": ATTENTION_IMPLEMENTATION,
+        "padding": {"training": "right", "evaluation": "left"},
         "labels": info["prompt_config"]["labels"],
         "prompt_config": info["prompt_config"], "dataset": metadata,
         "model": model_fingerprint(args.model_dir, args.hash_model_weights),
@@ -770,7 +772,10 @@ class DurableCheckpoint(TrainerCallback):
             control.should_save = True
         return control
 
-    def on_save(self, args, state, control, **kwargs):
+    def on_save(self, args, state, control, model=None, optimizer=None, **kwargs):
+        check_parameters(model, f"checkpoint {state.global_step}")
+        if optimizer is not None:
+            check_optimizer(model, optimizer, f"checkpoint {state.global_step}")
         directory = Path(args.output_dir) / f"checkpoint-{state.global_step}"
         paths = [path for path in directory.rglob("*") if path.is_file() and path.name != "complete.json"]
         sync_files(paths)
@@ -787,6 +792,7 @@ class DurableCheckpoint(TrainerCallback):
 
 
 def save_adapter(model, tokenizer, directory, manifest_sha256, **metadata):
+    check_parameters(model, "adapter save")
     directory = Path(directory)
     if directory.exists():
         raise FileExistsError(f"Adapter destination already exists: {directory}")
@@ -1006,7 +1012,7 @@ def train_or_restore(cfg, info, model, tokenizer, precision, artifacts, args, lo
         gradient_checkpointing=True, gradient_checkpointing_kwargs={"use_reentrant": False},
         seed=cfg["seed"], data_seed=cfg["seed"],
     )
-    callbacks = [DurableCheckpoint(artifacts)]
+    callbacks = [FiniteParameters(), DurableCheckpoint(artifacts)]
     selection = None
     if cfg["checkpoint_selection"] == "validation_roc_auc":
         selection = ValidationSelection(
@@ -1017,7 +1023,7 @@ def train_or_restore(cfg, info, model, tokenizer, precision, artifacts, args, lo
             log,
         )
         callbacks.append(selection)
-    trainer = Trainer(model=model, args=arguments, train_dataset=tokenized,
+    trainer = FiniteTrainer(model=model, args=arguments, train_dataset=tokenized,
                       data_collator=DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False),
                       callbacks=callbacks)
     checkpoint = latest_checkpoint(trainer_directory, artifacts.manifest_sha256, log) if args.resume else None
@@ -1123,7 +1129,7 @@ def main():
     tokenizer = AutoTokenizer.from_pretrained(str(args.model_dir), local_files_only=True, trust_remote_code=False)
     if tokenizer.pad_token_id is None:
         tokenizer.pad_token = tokenizer.eos_token
-    tokenizer.padding_side = "left"
+    tokenizer.padding_side = "right"
     model_config = AutoConfig.from_pretrained(str(args.model_dir), local_files_only=True, trust_remote_code=False)
     limit = cfg["eval_max_seq_length"] or cfg["max_seq_length"]
     context = model_config.max_position_embeddings

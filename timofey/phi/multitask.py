@@ -153,10 +153,11 @@ def make_manifest(experiment, args, config, loaded, balanced, rows, precision):
     return {"schema_version": 1, "purpose": "shared_training", "run_id": args.run_dir.resolve().name,
             "plan_id": args.plan_id, "scoring": SCORING, "config": config,
             "dtype": precision["name"], "attention_implementation": experiment.ATTENTION_IMPLEMENTATION,
+            "padding": {"training": "right", "evaluation": "left"},
             "datasets": datasets,
             "model": experiment.model_fingerprint(args.model_dir, args.hash_model_weights),
             "source": {"files": hash_files(source, [source / name for name in
-                                                   ("multitask.py", "experiment.py", "scoring.py", "run_artifacts.py", "attention.py")])},
+                                                   ("multitask.py", "experiment.py", "scoring.py", "run_artifacts.py", "attention.py", "numerics.py")])},
             "training": {"rows": len(rows["source_row_id"]), "row_order_file": "training_rows.json",
                          "row_order_sha256": rows_digest(rows), "balance": "within_dataset_upsampling_to_largest_class",
                          "shuffle": "numpy_default_rng_permutation_then_seeded_trainer_sampling",
@@ -173,6 +174,7 @@ def child_manifest(parent, parent_sha256, name, info, run_dir, purpose, adapter,
     return {"schema_version": 1, "purpose": purpose, "run_id": Path(run_dir).name,
             "plan_id": parent["plan_id"], "scoring": SCORING, "config": config,
             "dtype": parent["dtype"], "attention_implementation": parent.get("attention_implementation"),
+            "padding": parent.get("padding"),
             "labels": info["prompt_config"]["labels"],
             "prompt_config": info["prompt_config"], "dataset": parent["datasets"][name],
             "evaluation_split": split, "evaluation_row_ids": info["eval_df"].index.tolist(),
@@ -289,10 +291,10 @@ def train_or_restore(experiment, args, config, loaded, balanced, order, tokenize
     device = "cuda" if torch.cuda.is_available() else "cpu"
     selection = experiment.ValidationSelection(
         artifacts, tokenizer, validation_scorer(experiment, artifacts, loaded, tokenizer, device, log), log)
-    trainer = experiment.Trainer(
+    trainer = experiment.FiniteTrainer(
         model=model, args=arguments, train_dataset=tokenized,
         data_collator=experiment.DataCollatorForLanguageModeling(tokenizer=tokenizer, mlm=False),
-        callbacks=[experiment.DurableCheckpoint(artifacts), selection])
+        callbacks=[experiment.FiniteParameters(), experiment.DurableCheckpoint(artifacts), selection])
     checkpoint = experiment.latest_checkpoint(checkpoints, artifacts.manifest_sha256, log) if args.resume else None
     artifacts.status("running", "training", checkpoint=checkpoint)
     started = time.monotonic()
@@ -340,7 +342,7 @@ def main():
     tokenizer = experiment.AutoTokenizer.from_pretrained(str(args.model_dir), local_files_only=True, trust_remote_code=False)
     if tokenizer.pad_token_id is None:
         tokenizer.pad_token = tokenizer.eos_token
-    tokenizer.padding_side = "left"
+    tokenizer.padding_side = "right"
     model_config = experiment.AutoConfig.from_pretrained(str(args.model_dir), local_files_only=True, trust_remote_code=False)
     if max(config["max_seq_length"], config["eval_max_seq_length"]) > model_config.max_position_embeddings:
         raise ValueError("Requested sequence length exceeds the local model context")
