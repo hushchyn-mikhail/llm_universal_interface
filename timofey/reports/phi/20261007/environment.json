@@ -1,0 +1,19 @@
+{
+  "python": "3.10.18 (main, Jun  5 2025, 13:14:17) [GCC 11.2.0]",
+  "packages": {
+    "torch": "2.6.0+cu124",
+    "transformers": "4.57.6",
+    "peft": "0.19.1",
+    "numpy": "1.26.4",
+    "pandas": "2.3.2",
+    "scikit-learn": "1.7.2",
+    "accelerate": "1.13.0"
+  },
+  "cuda": "12.4",
+  "gpu": "Tesla V100-SXM2-32GB",
+  "dtype_by_campaign": {
+    "phi_20260927": "float16",
+    "phi_retry_20261001": "float16",
+    "phi_retry_20261005": "float32"
+  }
+}
