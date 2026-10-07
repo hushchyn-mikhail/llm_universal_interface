@@ -5,10 +5,10 @@ LLM как универсальный интерфейс
 
 - [Gemma: ноутбуки по датасетам и режимам](timofey/gemma/notebooks/).
 - [Phi: результаты, код и запуск](timofey/phi/README.md).
-- [Phi: таблица ROC-AUC](timofey/reports/phi/20261005/table.md) и [все метрики в CSV](timofey/reports/phi/20261005/results.csv).
+- [Phi: таблица ROC-AUC](timofey/reports/phi/20261007/table.md) и [все метрики в CSV](timofey/reports/phi/20261007/results.csv).
 - [Подготовка данных и моделей](timofey/data/) и [зависимости](timofey/requirements.txt).
 
-Для Phi опубликованы 47 результатов, выгрузка от 5 октября 2026.
+Для Phi опубликованы все 56 результатов, выгрузка от 7 октября 2026.
 Состав результатов и смысл столбцов описаны в инструкции выше.
 
 Для доступа к Gemma используйте `hf auth login` или переменную `HF_TOKEN`.
